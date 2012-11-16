@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'brainf'
+
+input = ''
+
+if ARGV.size == 1
+  if File.exists?(ARGV.first)
+    input = File.open(ARGV.first).read
+  else
+    input = ARGV.first
+  end
+else
+  input = STDIN.read
+end
+
+interpreter = BrainF::Interpreter.new
+interpreter.eval(input)
