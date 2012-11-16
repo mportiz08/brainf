@@ -6,6 +6,7 @@ module BrainF
       @instructions = input
       @data         = (1..30000).map { 0 }
       @iptr, @dptr  = 0, 0
+      @stack        = []
       
       while @iptr < @instructions.size
         case @instructions[@iptr]
@@ -60,18 +61,24 @@ module BrainF
     end
     
     def jump_forward
-      if @data[@dptr] == 0
-        while @instructions[@iptr] != ']'
-          @iptr += 1
-        end
+      return if @data[@dptr] != 0
+      
+      @stack.push '['
+      while !@stack.empty?
+        @iptr += 1
+        @stack.push '[' if @instructions[@iptr] == '['
+        @stack.pop      if @instructions[@iptr] == ']'
       end
     end
     
     def jump_back
-      if @data[@dptr] != 0
-        while @instructions[@iptr] != '['
-          @iptr -= 1
-        end
+      return if @data[@dptr] == 0
+      
+      @stack.push ']'
+      while !@stack.empty?
+        @iptr -= 1
+        @stack.push ']' if @instructions[@iptr] == ']'
+        @stack.pop      if @instructions[@iptr] == '['
       end
     end
   end
