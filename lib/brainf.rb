@@ -1,5 +1,3 @@
-require 'io/console'
-
 module BrainF
   class Interpreter    
     def eval(input)
@@ -57,7 +55,7 @@ module BrainF
     end
     
     def accept_byte
-      @data[@dptr] = STDIN.getch.ord
+      @data[@dptr] = STDIN.getc.ord unless STDIN.eof?
     end
     
     def jump_forward
