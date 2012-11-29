@@ -10,6 +10,10 @@ class String
   def unindent
     gsub /^#{self[/\A\s*/]}/, ''
   end
+  
+  def as_one_line
+    split("\n").join('')
+  end
 end
 
 def mock_stdout(&block)
@@ -17,4 +21,11 @@ def mock_stdout(&block)
   $stdout = StringIO.new
   yield
   $stdout = orig_stdout
+end
+
+def mock_stdin(input, &block)
+  orig_stdin = $stdin
+  $stdin = StringIO.new(input)
+  yield
+  $stdin = orig_stdin
 end
