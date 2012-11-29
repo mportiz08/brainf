@@ -185,6 +185,26 @@ class TestBrainfInterpreter < Test::Unit::TestCase
     test_interpreter_with_input program, input, output
   end
   
+  # TODO: i think there's an infinite loop with this test...
+  def test_rot13
+    # prints the result of applying the ROT13 cipher to the given input
+    # from http://codegolf.com/competition/run/8/5
+    program = <<-PROGRAM
+      +[,+[-[>+>+<<-]>[<+>-]+>>++++++++[<-------->-]<-[<[-]>>>+[<+<+>>-]<[>+<-]<[<++>
+      >>+[<+<->>-]<[>+<-]]>[<]<]>>[-]<<<[[-]<[>>+>+<<<-]>>[<<+>>-]>>++++++++[<-------
+      ->-]<->>++++[<++++++++>-]<-<[>>>+<<[>+>[-]<<-]>[<+>-]>[<<<<<+>>>>++++[<++++++++
+      >-]>-]<<-<-]>[<<<<[-]>>>>[<<<<->>>>-]]<<++++[<<++++++++>>-]<<-[>>+>+<<<-]>>[<<+
+      >>-]+>>+++++[<----->-]<-[<[-]>>>+[<+<->>-]<[>+<-]<[<++>>>+[<+<+>>-]<[>+<-]]>[<]
+      <]>>[-]<<<[[-]<<[>>+>+<<<-]>>[<<+>>-]+>------------[<[-]>>>+[<+<->>-]<[>+<-]<[<
+      ++>>>+[<+<+>>-]<[>+<-]]>[<]<]>>[-]<<<<<------------->>[[-]+++++[<<+++++>>-]<<+>
+      >]<[>++++[<<++++++++>>-]<-]>]<[-]++++++++[<++++++++>-]<+>]<.[-]+>>+<]>[[-]<]<]
+    PROGRAM
+    
+    input  = 'november'
+    output = 'abirzore'
+    #test_interpreter_with_input program, input, output
+  end
+  
   private
   
   def test_interpreter(program, expected_result)
