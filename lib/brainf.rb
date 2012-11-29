@@ -55,7 +55,7 @@ module BrainF
     end
     
     def accept_byte
-      @data[@dptr] = STDIN.getc.ord unless STDIN.eof?
+      @data[@dptr] = $stdin.getc.ord unless $stdin.eof?
     end
     
     def jump_forward
